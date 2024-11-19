@@ -1,0 +1,314 @@
+/* @title dark orange line */
+
+*{
+  label: [name];
+  font-fill: #000000;
+  font-family:'B Titr';
+  font-size: 13;
+  font-style: normal;
+  font-weight: bold;
+  halo-color: #FFFFFF;
+  halo-radius: 1;
+  -gt-label-follow-line: true;
+  -gt-label-repeat: 400;
+  -gt-label-group: true;
+  -gt-label-max-displacement: 200;
+  z-index: 2;
+
+}
+
+
+[fclass='trunk'] {
+  stroke: #FEC979;
+  [@scale > 10000000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+  /*---  zoom level 6 ---*/
+  [@scale >= 4000000][@scale < 10000000] {
+    stroke-width: 0.1;
+  };
+  /*---  zoom level 7 ---*/
+  [@scale >= 2000000][@scale < 4000000] {
+    stroke-width: 0.1;
+  };
+  /*---  zoom level 8 ---*/
+  [@scale >= 1000000][@scale < 2000000] {
+  stroke-width: 0.1;
+  };
+   /*--- zoom level 9 ---*/
+  [@scale >= 500000][@scale < 1000000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 10 ---*/
+  [@scale >= 250000][@scale < 500000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 11 ---*/
+  [@scale >= 150000][@scale < 250000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 12 ---*/
+  [@scale >= 70000][@scale < 150000] {
+    stroke-width: 1;
+  };
+   /*--- zoom level 13 ---*/
+  [@scale >= 35000][@scale < 70000] {
+    stroke-width: 1;
+  };
+   /*--- zoom level 14 ---*/
+  [@scale >= 15000][@scale < 35000] {
+    stroke-width: 2.5;
+  };
+   /*--- zoom level 15 ---*/
+  [@scale >= 8000][@scale < 15000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 8,5;
+  };
+   /*--- zoom level 16 ---*/
+  [@scale >= 4000][@scale < 8000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 15,10;
+  };
+   /*--- zoom level 17 ---*/
+  [@scale >= 2000][@scale < 4000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 30,10;
+  };
+   /*--- zoom level 18 ---*/
+  [@scale >= 1000][@scale < 2000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 45,20;
+  };
+   /*--- zoom level 19 ---*/
+  [@scale >= 500][@scale < 1000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 55,30;
+  };
+  /*--- zoom level 20 ---*/
+  [@scale < 500] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 55,30;
+  };
+}
+
+
+[fclass='motorway' or fclass='motorway_link'] {
+  stroke: #FB972D;
+  [@scale > 10000000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+  [@scale >= 4000000][@scale < 10000000] {
+    stroke-width: 0.1;
+  };
+  [@scale >= 2000000][@scale < 4000000] {
+    stroke-width: 1;
+  };
+  [@scale >= 1000000][@scale < 2000000] {
+    stroke-width: 1;
+  };
+  [@scale >= 500000][@scale < 1000000] {
+    stroke-width: 1;
+  };
+  [@scale >= 250000][@scale < 500000] {
+    stroke-width: 1;
+  };
+  [@scale >= 150000][@scale < 250000] {
+    stroke-width: 1;
+  };
+  [@scale >= 70000][@scale < 150000] {
+    stroke-width: 1;
+  };
+  [@scale >= 15000][@scale < 70000] {
+    stroke-width: 1;
+  };
+  [@scale >= 4000][@scale < 15000] {
+    stroke-width: 1;
+  };
+  [@scale >= 2000][@scale < 4000] {
+    stroke-width: 1;
+  };
+  [@scale >= 1000][@scale < 2000] {
+    stroke-width: 1;
+  };
+  [@scale >= 500][@scale < 1000] {
+    stroke-width: 1;
+  };
+  [@scale < 500] {
+    stroke-width: 1;
+  };
+}
+
+[fclass='secondary' or fclass='secondary_link' or fclass='trunk_link'] {
+  stroke: #DADDE8,#ffffff;
+  [@scale > 4000000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+    /*---  zoom level 6 ---*/
+  [@scale >= 4000000][@scale < 10000000] {
+    stroke-width: 0.1;
+  };
+  /*---  zoom level 7 ---*/
+  [@scale >= 2000000][@scale < 4000000] {
+    stroke-width: 0.1;
+  };
+  /*---  zoom level 8 ---*/
+  [@scale >= 1000000][@scale < 2000000] {
+  stroke-width: 0.1;
+  };
+   /*--- zoom level 9 ---*/
+  [@scale >= 500000][@scale < 1000000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 10 ---*/
+  [@scale >= 250000][@scale < 500000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 11 ---*/
+  [@scale >= 150000][@scale < 250000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 12 ---*/
+  [@scale >= 70000][@scale < 150000] {
+    stroke-width: 1;
+  };
+   /*--- zoom level 13 ---*/
+  [@scale >= 35000][@scale < 70000] {
+    stroke-width: 1;
+  };
+   /*--- zoom level 14 ---*/
+  [@scale >= 15000][@scale < 35000] {
+    stroke-width: 2.5;
+  };
+   /*--- zoom level 15 ---*/
+  [@scale >= 8000][@scale < 15000] {
+    stroke-width: 8,5;
+  };
+   /*--- zoom level 16 ---*/
+  [@scale >= 4000][@scale < 8000] {
+    stroke-width: 15,10;
+  };
+   /*--- zoom level 17 ---*/
+  [@scale >= 2000][@scale < 4000] {
+    stroke-width: 10,8;
+  };
+   /*--- zoom level 18 ---*/
+  [@scale >= 1000][@scale < 2000] {
+    stroke-width: 25,20;
+  };
+   /*--- zoom level 19 ---*/
+  [@scale >= 500][@scale < 1000] {
+    stroke-width: 35,25;
+  };
+  /*--- zoom level 20 ---*/
+  [@scale < 500] {
+    stroke-width: 35,20;
+  };
+}
+
+
+[fclass='primary' or fclass='primary_link'] {
+  stroke: #DADDE8,#ffffff;
+  [@scale > 500000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+  [@scale >= 250000][@scale < 500000] {
+    stroke-width: 1;
+  };
+  [@scale >= 150000][@scale < 250000] {
+    stroke-width: 1;
+  };
+  [@scale >= 70000][@scale < 150000] {
+    stroke-width: 1;
+  };
+    /*------------ zoom level 13 -----------*/
+  [@scale >= 15000][@scale < 70000] {
+    stroke-width: 3.4,3;
+  };
+  [@scale >= 4000][@scale < 15000] {
+    stroke-width: 3.4,3;
+  };
+  [@scale >= 2000][@scale < 4000] {
+    stroke-width: 5,4;
+  };
+  [@scale >= 1000][@scale < 2000] {
+    stroke-width: 5,4;
+  };
+  [@scale >= 500][@scale < 1000] {
+    stroke-width: 8,7;
+  };
+  [@scale < 500] {
+    stroke-width: 8,7;
+  };
+}
+
+[fclass='residential'] {
+  stroke: #DADDE8,#ffffff;
+  [@scale > 70000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+   /*--- zoom level 13 ---*/
+   [@scale >= 35000][@scale < 70000] {
+    stroke-width: 1,0.5;
+  };
+   /*--- zoom level 14 ---*/
+  [@scale >= 15000][@scale < 35000] {
+    stroke-width: 1,0.5;
+  };
+   /*--- zoom level 15 ---*/
+  [@scale >= 8000][@scale < 15000] {
+    stroke-width: 1,0.5;
+  };
+   /*--- zoom level 16 ---*/
+  [@scale >= 4000][@scale < 8000] {
+    stroke-width: 1,0.5;
+  };
+   /*--- zoom level 17 ---*/
+  [@scale >= 2000][@scale < 4000] {
+    stroke-width: 1,0.5;
+  };
+   /*--- zoom level 18 ---*/
+  [@scale >= 1000][@scale < 2000] {
+    stroke-width: 15,10;
+  };
+   /*--- zoom level 19 ---*/
+  [@scale >= 500][@scale < 1000] {
+    stroke-width: 0,10;
+  };
+  /*--- zoom level 20 ---*/
+  [@scale < 500] {
+    stroke-width: 0,10;
+  };
+}
+
+[
+fclass='tertiary' or
+fclass='tertiary_link' or
+fclass='footway' or
+fclass='cycleway' or
+fclass='path' or
+fclass='living_street' or
+fclass='service' or
+fclass='steps' or
+fclass='track' or
+fclass='track_grade1' or
+fclass='track_grade2' or
+fclass='track_grade3' or
+fclass='track_grade4' or
+fclass='track_grade5' or
+fclass='unclassified' or
+fclass='unknown' or
+fclass='bridleway' or
+fclass='busway' or
+fclass='pedestrian'
+]
+{
+  stroke-opacity: 0;
+    stroke: #8cff5b;
+  	stroke-width: 0.1;
+}
+
