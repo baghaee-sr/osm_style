@@ -20,7 +20,7 @@
 
 [fclass='trunk'] {
   stroke: #FEC979;
-  [@scale > 10000000]{
+  [@scale > 20000000]{
     stroke-opacity: 0;
     stroke-width: 0;
   };
@@ -95,7 +95,7 @@
 
 [fclass='motorway' or fclass='motorway_link']  {
   stroke: #FB972D;
-  [@scale > 10000000]{
+  [@scale > 20000000]{
     stroke-opacity: 0;
     stroke-width: 0;
   };
@@ -234,7 +234,6 @@
   };
 }
 
-
 [fclass='primary' or fclass='primary_link'] {
   stroke: #DADDE8,#ffffff;
   [@scale > 500000]{
@@ -279,27 +278,27 @@
   };
    /*--- zoom level 13 ---*/
    [@scale >= 35000][@scale < 70000] {
-    stroke-width: 1,0.5;
+    stroke-width: 0,0.5;
   };
    /*--- zoom level 14 ---*/
   [@scale >= 15000][@scale < 35000] {
-    stroke-width: 1,0.5;
+    stroke-width: 0,0.5;
   };
    /*--- zoom level 15 ---*/
   [@scale >= 8000][@scale < 15000] {
-    stroke-width: 1,0.5;
+    stroke-width: 0,0.5;
   };
    /*--- zoom level 16 ---*/
   [@scale >= 4000][@scale < 8000] {
-    stroke-width: 1,0.5;
+    stroke-width: 0,0.5;
   };
    /*--- zoom level 17 ---*/
   [@scale >= 2000][@scale < 4000] {
-    stroke-width: 1,0.5;
+    stroke-width: 0,10;
   };
    /*--- zoom level 18 ---*/
   [@scale >= 1000][@scale < 2000] {
-    stroke-width: 15,10;
+    stroke-width: 0,10;
   };
    /*--- zoom level 19 ---*/
   [@scale >= 500][@scale < 1000] {
@@ -333,8 +332,41 @@ fclass='busway' or
 fclass='pedestrian'
 ]
 {
-  stroke-opacity: 0;
-    stroke: #8cff5b;
-  	stroke-width: 0.1;
+  stroke: #DADDE8,#ffffff;
+  [@scale > 70000]{
+    stroke-opacity: 0;
+    stroke-width: 0;
+  };
+   /*--- zoom level 13 ---*/
+   [@scale >= 35000][@scale < 70000] {
+    stroke-width: 0,0.5;
+  };
+   /*--- zoom level 14 ---*/
+  [@scale >= 15000][@scale < 35000] {
+    stroke-width: 0,0.5;
+  };
+   /*--- zoom level 15 ---*/
+  [@scale >= 8000][@scale < 15000] {
+    stroke-width: 0,0.5;
+  };
+   /*--- zoom level 16 ---*/
+  [@scale >= 4000][@scale < 8000] {
+    stroke-width: 0,0.5;
+  };
+   /*--- zoom level 17 ---*/
+  [@scale >= 2000][@scale < 4000] {
+    stroke-width: 0,10;
+  };
+   /*--- zoom level 18 ---*/
+  [@scale >= 1000][@scale < 2000] {
+    stroke-width: 0,10;
+  };
+   /*--- zoom level 19 ---*/
+  [@scale >= 500][@scale < 1000] {
+    stroke-width: 0,10;
+  };
+  /*--- zoom level 20 ---*/
+  [@scale < 500] {
+    stroke-width: 0,10;
+  };
 }
-
