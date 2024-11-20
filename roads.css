@@ -93,50 +93,76 @@
 }
 
 
-[fclass='motorway' or fclass='motorway_link'] {
+[fclass='motorway' or fclass='motorway_link']  {
   stroke: #FB972D;
   [@scale > 10000000]{
     stroke-opacity: 0;
     stroke-width: 0;
   };
+  /*---  zoom level 6 ---*/
   [@scale >= 4000000][@scale < 10000000] {
     stroke-width: 0.1;
   };
+  /*---  zoom level 7 ---*/
   [@scale >= 2000000][@scale < 4000000] {
-    stroke-width: 1;
+    stroke-width: 0.1;
   };
+  /*---  zoom level 8 ---*/
   [@scale >= 1000000][@scale < 2000000] {
-    stroke-width: 1;
+  stroke-width: 0.1;
   };
+   /*--- zoom level 9 ---*/
   [@scale >= 500000][@scale < 1000000] {
-    stroke-width: 1;
+    stroke-width: 0.1;
   };
+   /*--- zoom level 10 ---*/
   [@scale >= 250000][@scale < 500000] {
-    stroke-width: 1;
+    stroke-width: 0.1;
   };
+   /*--- zoom level 11 ---*/
   [@scale >= 150000][@scale < 250000] {
-    stroke-width: 1;
+    stroke-width: 0.1;
   };
+   /*--- zoom level 12 ---*/
   [@scale >= 70000][@scale < 150000] {
-    stroke-width: 1;
+    stroke-width: 0.1;
   };
-  [@scale >= 15000][@scale < 70000] {
-    stroke-width: 1;
+   /*--- zoom level 13 ---*/
+  [@scale >= 35000][@scale < 70000] {
+    stroke-width: 0.1;
   };
-  [@scale >= 4000][@scale < 15000] {
-    stroke-width: 1;
+   /*--- zoom level 14 ---*/
+  [@scale >= 15000][@scale < 35000] {
+    stroke-width: 0.1;
   };
+   /*--- zoom level 15 ---*/
+  [@scale >= 8000][@scale < 15000] {
+    stroke-width: 0.1;
+  };
+   /*--- zoom level 16 ---*/
+  [@scale >= 4000][@scale < 8000] {
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 15,10;
+  };
+   /*--- zoom level 17 ---*/
   [@scale >= 2000][@scale < 4000] {
-    stroke-width: 1;
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 30,10;
   };
+   /*--- zoom level 18 ---*/
   [@scale >= 1000][@scale < 2000] {
-    stroke-width: 1;
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 45,20;
   };
+   /*--- zoom level 19 ---*/
   [@scale >= 500][@scale < 1000] {
-    stroke-width: 1;
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 55,30;
   };
+  /*--- zoom level 20 ---*/
   [@scale < 500] {
-    stroke-width: 1;
+    stroke: #FBCD86,#FFF1DB;
+    stroke-width: 55,30;
   };
 }
 
