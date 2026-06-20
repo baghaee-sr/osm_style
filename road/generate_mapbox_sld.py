@@ -20,22 +20,32 @@ BANDS = [
     ('F', 'z17-18', 100,     8531,         MW_NEAR, TR_NEAR),
 ]
 
+# ضریب کلی ضخامت — برای تنظیم در GeoServer
+WIDTH_SCALE = 0.55
+
+# (casing, fill) قبل از WIDTH_SCALE
 W = {
-    'motorway':      {'A': (2.5, 2),   'B': (5, 4),    'C': (9, 7),    'D': (14, 12),  'E': (22, 20),  'F': (34, 32)},
-    'trunk':         {'A': (2.5, 2),   'B': (5, 4),    'C': (9, 7),    'D': (14, 12),  'E': (22, 20),  'F': (34, 32)},
-    'motorway_link': {'C': (5, 4),     'D': (8, 6),    'E': (12, 10),  'F': (22, 20)},
-    'trunk_link':    {'C': (5, 4),     'D': (8, 6),    'E': (12, 10),  'F': (22, 20)},
-    'primary':       {'A': (0, 1.5),   'B': (5, 4),    'C': (8, 6),    'D': (12, 10),  'E': (18, 16),  'F': (30, 28)},
-    'primary_link':  {'C': (0, 1),     'D': (5, 4),    'E': (8, 6),    'F': (18, 16)},
-    'secondary':     {'B': (0, 1),     'C': (5, 4),    'D': (10, 8),   'E': (16, 14),  'F': (28, 26)},
-    'secondary_link':{'C': (0, 1),     'D': (5, 4),    'E': (8, 6),    'F': (18, 16)},
-    'tertiary':      {'B': (0, 1),     'C': (5, 4),    'D': (10, 8),   'E': (16, 14),  'F': (28, 26)},
-    'tertiary_link': {'C': (0, 1),     'D': (5, 4),    'E': (8, 6),    'F': (18, 16)},
-    'residential':   {'C': (0, 1),     'D': (6, 4),    'E': (10, 8),   'F': (22, 20)},
-    'service':       {'D': (4, 2),     'E': (6, 4),    'F': (12, 10)},
-    'path':          {'C': (3, 1),     'D': (4, 2),    'E': (5, 3),    'F': (8, 4)},
-    'pedestrian':    {'C': (0, 1),     'D': (4, 2),    'E': (6, 4),    'F': (12, 10)},
+    'motorway':      {'A': (1.5, 1.2), 'B': (3, 2.5),   'C': (5, 4),   'D': (8, 7),   'E': (12, 10), 'F': (18, 16)},
+    'trunk':         {'A': (1.5, 1.2), 'B': (3, 2.5),   'C': (5, 4),   'D': (8, 7),   'E': (12, 10), 'F': (18, 16)},
+    'motorway_link': {'C': (3, 2.5),   'D': (5, 4),    'E': (8, 7),   'F': (12, 10)},
+    'trunk_link':    {'C': (3, 2.5),   'D': (5, 4),    'E': (8, 7),   'F': (12, 10)},
+    'primary':       {'A': (0, 1),     'B': (3, 2.5),  'C': (5, 4),   'D': (7, 6),   'E': (10, 9),  'F': (16, 14)},
+    'primary_link':  {'C': (0, 0.8),   'D': (3, 2.5),  'E': (5, 4),   'F': (10, 9)},
+    'secondary':     {'B': (0, 0.8),   'C': (3, 2.5),  'D': (6, 5),   'E': (9, 8),   'F': (14, 12)},
+    'secondary_link':{'C': (0, 0.8),   'D': (3, 2.5),  'E': (5, 4),   'F': (10, 9)},
+    'tertiary':      {'B': (0, 0.8),   'C': (3, 2.5),  'D': (6, 5),   'E': (9, 8),   'F': (14, 12)},
+    'tertiary_link': {'C': (0, 0.8),   'D': (3, 2.5),  'E': (5, 4),   'F': (10, 9)},
+    'residential':   {'C': (0, 0.8),   'D': (4, 3),    'E': (6, 5),   'F': (11, 10)},
+    'service':       {'D': (3, 1.5),   'E': (4, 2.5),  'F': (7, 6)},
+    'path':          {'C': (2, 0.8),   'D': (2.5, 1),  'E': (3, 1.5), 'F': (4, 2)},
+    'pedestrian':    {'C': (0, 0.8),   'D': (3, 1.5),  'E': (4, 2.5), 'F': (7, 6)},
 }
+
+
+def scale_width(w):
+    if w <= 0:
+        return w
+    return max(0.3, round(w * WIDTH_SCALE, 2))
 
 ROAD_GROUPS = [
     {'key': 'path', 'fclasses': ['footway', 'path', 'cycleway', 'bridleway', 'steps'],
@@ -110,6 +120,7 @@ def generate(path):
                 continue
             eff_max = group['band_a_max_scale'] if group.get('band_a_max_scale') and band_id == 'A' else max_s
             cw, fw = W[wkey][band_id]
+            cw, fw = scale_width(cw), scale_width(fw)
             fclasses = group['fclasses']
             label = esc(f"{','.join(fclasses)} | {zoom_label}")
             fill = fill_color(group, mw_fill, tr_fill)
