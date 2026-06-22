@@ -1,31 +1,30 @@
 #!/usr/bin/env python3
 """Copy day road SLD and apply night color palette (structure unchanged)."""
 
+import re
 from pathlib import Path
 
 SRC = Path(__file__).with_name('gis_osm_roads_free_1.sld')
 OUT = Path(__file__).with_name('gis_osm_roads_night.sld')
 
-# Day hex -> Night hex (roads only, stroke)
+# Day hex -> Night hex (line strokes)
 STROKE_MAP = {
-    '#d6d9e6': '#252D3A',   # casing روز -> حاشیه تیره
-    '#ffffff': '#5A6578',   # fill سفید -> خاکستری-آبی
+    '#d6d9e6': '#252D3A',
+    '#ffffff': '#5A6578',
     '#FFFFFF': '#5A6578',
     '#fefefe': '#565F70',
     '#fbfbfd': '#545D6E',
     '#fbfbfc': '#545D6E',
-    '#506077': '#4A8FD0',   # motorway fill -> آبی روشن‌تر برای شب
-    '#ffc46e': '#C49A58',   # trunk -> کهربایی muted
-    '#999999': '#353D4A',   # busway casing
-    '#dcdcdc': '#434C5A',   # track / service
-    '#fc9a30': '#8A6538',   # motorway دور
-    '#ffc56f': '#8A7340',   # trunk دور
+    '#506077': '#4A8FD0',
+    '#ffc46e': '#C49A58',
+    '#999999': '#353D4A',
+    '#dcdcdc': '#434C5A',
+    '#fc9a30': '#8A6538',
+    '#ffc56f': '#8A7340',
 }
 
-LABEL_TEXT = '#000000'       # day
-LABEL_TEXT_NIGHT = '#D8E2F0' # متن روشن
-LABEL_HALO = '#ffffff'       # day halo
-LABEL_HALO_NIGHT = '#141A24' # هalo تیره
+LABEL_TEXT_NIGHT = '#D8E2F0'
+LABEL_HALO_NIGHT = '#141A24'
 
 
 def apply_stroke_colors(text: str) -> str:
@@ -35,30 +34,42 @@ def apply_stroke_colors(text: str) -> str:
 
 
 def apply_label_colors(text: str) -> str:
-    # halo fill (only inside Halo blocks uses name="fill")
-    text = text.replace(
-        f'<sld:CssParameter name="fill">{LABEL_HALO}</sld:CssParameter>\n                            </sld:Fill>\n                        </sld:Halo>',
-        f'<sld:CssParameter name="fill">{LABEL_HALO_NIGHT}</sld:CssParameter>\n                            </sld:Fill>\n                        </sld:Halo>',
+    # Halo fill (all label halos use white in day style)
+    text = re.sub(
+        r'(<sld:Halo>.*?<sld:CssParameter name="fill">)#ffffff(</sld:CssParameter>)',
+        rf'\1{LABEL_HALO_NIGHT}\2',
+        text,
+        flags=re.DOTALL | re.IGNORECASE,
     )
-    text = text.replace(
-        f'<sld:CssParameter name="fill">{LABEL_HALO.upper()}</sld:CssParameter>\n                            </sld:Fill>\n                        </sld:Halo>',
-        f'<sld:CssParameter name="fill">{LABEL_HALO_NIGHT}</sld:CssParameter>\n                            </sld:Fill>\n                        </sld:Halo>',
-    )
-    # label text fill (after Halo, in TextSymbolizer Fill)
-    text = text.replace(
-        f'name="fill">{LABEL_TEXT}</sld:CssParameter>\n                            <sld:CssParameter name="fill-opacity">',
-        f'name="fill">{LABEL_TEXT_NIGHT}</sld:CssParameter>\n                            <sld:CssParameter name="fill-opacity">',
+    # Label text fill
+    text = re.sub(
+        r'(<sld:CssParameter name="fill">)#000000(</sld:CssParameter>\s*<sld:CssParameter name="fill-opacity">)',
+        rf'\1{LABEL_TEXT_NIGHT}\2',
+        text,
+        flags=re.IGNORECASE,
     )
     return text
 
 
 def apply_meta(text: str) -> str:
     text = text.replace('<sld:Name>style_osm_line</sld:Name>', '<sld:Name>style_osm_line_night</sld:Name>')
-    text = text.replace("<sld:Title>'Line'</sld:Title>", "<sld:Title>OSM Roads Night</sld:Title>")
-    if '<sld:Abstract>' not in text:
+    text = re.sub(
+        r'<sld:Title>.*?</sld:Title>',
+        '<sld:Title>OSM Roads Night</sld:Title>',
+        text,
+        count=1,
+    )
+    if '<sld:Abstract>' in text:
+        text = re.sub(
+            r'<sld:Abstract>.*?</sld:Abstract>',
+            '<sld:Abstract>Night palette derived from gis_osm_roads_free_1.sld (graduated labels)</sld:Abstract>',
+            text,
+            count=1,
+        )
+    else:
         text = text.replace(
             '<sld:Title>OSM Roads Night</sld:Title>',
-            '<sld:Title>OSM Roads Night</sld:Title>\n            <sld:Abstract>Night palette derived from gis_osm_roads_free_1.sld</sld:Abstract>',
+            '<sld:Title>OSM Roads Night</sld:Title>\n            <sld:Abstract>Night palette derived from gis_osm_roads_free_1.sld (graduated labels)</sld:Abstract>',
         )
     return text
 
@@ -69,7 +80,7 @@ def main():
     text = apply_label_colors(text)
     text = apply_meta(text)
     OUT.write_text(text, encoding='utf-8')
-    print(f'Generated {OUT}')
+    print(f'Generated {OUT} from {SRC.name}')
 
 
 if __name__ == '__main__':
